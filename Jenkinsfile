@@ -1,4 +1,5 @@
 pipeline {
+
     agent any
 
     tools {
@@ -14,10 +15,9 @@ pipeline {
             }
         }
 
-        stage('Install Playwright') {
+        stage('Install Browsers') {
             steps {
-                bat 'npm install'
-                bat 'npx playwright install'
+                bat 'mvn exec:java -e -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install"'
             }
         }
 
@@ -26,5 +26,7 @@ pipeline {
                 bat 'mvn clean test'
             }
         }
+
     }
+
 }
