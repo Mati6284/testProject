@@ -30,7 +30,7 @@ public class RegistrationTest {
                     .birthDate("1990-01-01")
                     .build();
             registration.fillCustomerRegistrationData();
-            System.out.println(page.title());
+            System.out.println("Koniec testu");
             context.close();
             browser.close();
         }
