@@ -20,6 +20,11 @@ public class RegistrationTest {
                     new Browser.NewContextOptions()
                             .setRecordVideoDir(Paths.get("videos/"))
             );
+            context.tracing().start(
+                    new Tracing.StartOptions()
+                            .setScreenshots(true)
+                            .setSnapshots(true)
+            );
             Page page = context.newPage();
             page.navigate("https://practicesoftwaretesting.com/auth/register");
 
@@ -31,6 +36,12 @@ public class RegistrationTest {
                     .build();
             registration.fillCustomerRegistrationData();
             System.out.println("Koniec testu");
+
+            context.tracing().stop(
+                    new Tracing.StopOptions()
+                            .setPath(Paths.get("trace.zip"))
+            );
+
             context.close();
             browser.close();
         }
