@@ -1,5 +1,4 @@
 pipeline {
-
     agent any
 
     tools {
@@ -17,19 +16,15 @@ pipeline {
 
         stage('Install Playwright') {
             steps {
-                sh '''
-                npm install
-                npx playwright install
-                '''
+                bat 'npm install'
+                bat 'npx playwright install'
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh 'mvn clean test'
+                bat 'mvn clean test'
             }
         }
-
     }
-
 }
