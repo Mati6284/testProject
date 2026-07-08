@@ -1,11 +1,10 @@
 package testPackage;
 
-import com.microsoft.playwright.Browser;
-import com.microsoft.playwright.BrowserType;
-import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Playwright;
+import com.microsoft.playwright.*;
 import org.junit.jupiter.api.Test;
 import pages.Registration;
+
+import java.nio.file.Paths;
 
 
 public class RegistrationTest {
@@ -17,7 +16,11 @@ public class RegistrationTest {
             Browser browser = playwright.chromium().launch(
                     new BrowserType.LaunchOptions().setHeadless(true)
             );
-            Page page = browser.newPage();
+            BrowserContext context = browser.newContext(
+                    new Browser.NewContextOptions()
+                            .setRecordVideoDir(Paths.get("videos/"))
+            );
+            Page page = context.newPage();
             page.navigate("https://practicesoftwaretesting.com/auth/register");
 
             Registration registration = Registration.builder()
@@ -28,6 +31,7 @@ public class RegistrationTest {
                     .build();
             registration.fillCustomerRegistrationData();
             System.out.println(page.title());
+            context.close();
             browser.close();
         }
     }
