@@ -8,14 +8,14 @@ import org.junit.jupiter.api.Test;
 import pages.Registration;
 
 
-public class test {
+public class RegistrationTest {
 
     @Test
     public void main() {
 
         try (Playwright playwright = Playwright.create()) {
             Browser browser = playwright.chromium().launch(
-                    new BrowserType.LaunchOptions().setHeadless(false)
+                    new BrowserType.LaunchOptions().setHeadless(true)
             );
             Page page = browser.newPage();
             page.navigate("https://practicesoftwaretesting.com/auth/register");
